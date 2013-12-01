@@ -1,0 +1,45 @@
+
+
+<head>
+  <title>Sean's Blog</title>
+</head>
+
+<body>
+<div style="float: right; margin-right:20px;">
+	{{loginButtons align="right"}}
+</div>
+
+<h1>Sean's Blog</h1>
+
+<div id="postForm"></div>
+<!-- {{>displayPostForm}} --> 
+{{>posts}}
+
+</body>
+
+<template name="postForm">  
+{{#if isAdmin}} 
+	{{>newPost}}
+{{/if}}
+</template>
+
+<template name="newPost">
+	<h2>New Post</h2>
+	<p>
+	<input name="postTitle" id="postTitle" size="30">
+	</p><p>
+	<textarea id="postBody" name="postBody" cols="50" rows="5"></textarea>  
+	</p><p>
+	<input type="button" value="Post">
+</template>
+
+<template name="posts">
+ 	<h2>Posts</h2>
+	<hr>
+	{{#each posts}}
+	<h3>{{title}}</h3>
+	<p>{{postDate}}</p>
+	<p>{{body}}</p>
+	{{/each}}
+</template>
+
