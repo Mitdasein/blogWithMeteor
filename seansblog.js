@@ -9,41 +9,26 @@ if (Meteor.isClient) {
     // find() returns all the objects
   };
 
-/*
- Template.newPost.isAdmin = function () {
-  if (Meteor.user (currentUser.isAdmin));
-  return currentUser.isAdmin;
-   Meteor.user()
- };
-*/
-
-
-
-Template.newPost.isAdmin = function () {
-    //var currentUser = Meteor.user();
- //   if (null !== currentUser) {
- //       if ('admin' === currentUser.username) {
-    if (null !== Meteor.user()) {
-        if ('admin' === Meteor.user().username) {
-            return true;
-        }
+  Template.postForm.isAdmin = function () {
+    if (null !== Meteor.user() && 'admin' === Meteor.user().username) {
+      return true;
+    } else {
+      return false;
     }
-};
+  };
 
-
-// stuff that happens in the newPost template
-Template.newPost.events = {
-
-  'click input': function () {
-    var post = {
-      postDate: new Date(), 
-      title: document.getElementById('postTitle').value,
-      body: document.getElementById('postBody').value
-    };  
-    Posts.insert(post);
-    document.getElementById('postTitle').value = '';
-    document.getElementById('postBody').value = '';
-    console.log("insert: " + post);
+  // stuff that happens in the newPost template
+  Template.newPost.events = {
+    'click input': function () {
+      var post = {
+        postDate: new Date(), 
+        title: document.getElementById('postTitle').value,
+        body: document.getElementById('postBody').value
+      };  
+      Posts.insert(post);
+      document.getElementById('postTitle').value = '';
+      document.getElementById('postBody').value = '';
+      console.log("insert: " + post);
     }
   };
 }
