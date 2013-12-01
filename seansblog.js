@@ -15,7 +15,7 @@ if (Meteor.isClient) {
   return currentUser.isAdmin;
    Meteor.user()
  };
-*/
+ */
 
 
 
@@ -23,11 +23,11 @@ Template.newPost.isAdmin = function () {
     //var currentUser = Meteor.user();
  //   if (null !== currentUser) {
  //       if ('admin' === currentUser.username) {
-    if (null !== Meteor.user()) {
-        if ('admin' === Meteor.user().username) {
-            return true;
-        }
+  if (null !== Meteor.user()) {
+    if ('admin' === Meteor.user().username) {
+      return true;
     }
+  }
 };
 
 
@@ -44,8 +44,8 @@ Template.newPost.events = {
     document.getElementById('postTitle').value = '';
     document.getElementById('postBody').value = '';
     console.log("insert: " + post);
-    }
-  };
+  }
+};
 }
 
 if (Meteor.isServer) {
@@ -89,9 +89,11 @@ Meteor.render(function () {
 });
 */
 
-var fragment = Meteor.render(
-  function() {
-    return Template.postForm({});
-  }
-);
-document.getElementById("postForm").appendChild(fragment);
+if(Meteor.isClient) {
+  var fragment = Meteor.render(
+    function() {
+      return Template.postForm({});
+    }
+    );
+  document.getElementById("postForm").appendChild(fragment);
+}
